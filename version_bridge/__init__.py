@@ -19,11 +19,11 @@ import os
 
 
 class BridgeConnection:
-    def __init__(self, version, module, path, function_name):
+    def __init__(self, version, module, function_name, path=None):
         self.version = version
         self.module = module
-        self.path = path
         self.function_name = function_name
+        self.path = path
 
     def __call__(self, *args):
         gw = execnet.makegateway("popen//python=python%s" % self.version)
@@ -81,10 +81,13 @@ class BridgeConnection:
 
 
 class Bridge:
-    def __init__(self, version, module, path):
+    def __init__(self, version, module, path=None):
         self.version = version
         self.module = module
         self.path = path
 
+    def __getattr__(self, item):
+        return self.connect(item)
+
     def connect(self, function_name):
-        return BridgeConnection(self.version, self.module, self.path, function_name)
+        return BridgeConnection(self.version, self.module, function_name, self.path)
