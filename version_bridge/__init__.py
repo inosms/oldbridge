@@ -87,7 +87,4 @@ class Bridge:
         self.path = path
 
     def __getattr__(self, item):
-        return self.connect(item)
-
-    def connect(self, function_name):
-        return BridgeConnection(self.version, self.module, function_name, self.path)
+        return BridgeConnection(self.version, self.module, item, self.path)

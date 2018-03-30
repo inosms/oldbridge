@@ -14,15 +14,14 @@ Sometimes upgrading an old codebase to python 3 is infeasable due to a lot of de
 
 ## Usage
 
-For globally installed packages use it as follows.
-
 Suppose you want to call 
 ```python
 def old_function(input):
     print "I only work with python 2.7"
     return {'result': 'Your parameter was ' + str(input)}
 ```
-located in package `old_python`.
+located in package `old_python` but from a python `3` script.
+For this simply do:
 
 ```python
 import version_bridge
@@ -44,9 +43,9 @@ Also `stderr` and `stdout` will be redirected to the current process.
 If the code you want to use lies in a relative path to your current script, use the following:
 
 ```python
-import version_bridge as vb
+import version_bridge
 
-old_module = vb.Bridge(version="2.7",module="old_python", path="../path/relative/to/script")
+old_module = version_bridge.Bridge(version="2.7",module="old_python", path="../path/relative/to/script")
 
 print(old_module.old_function(19))
 

@@ -7,5 +7,6 @@ setup(name='version_bridge',
       url='http://github.com/inosms/version_bridge',
       license='MIT',
       author="inosms",
+      author_email="simon.ster.somi@gmail.com",
       packages=['version_bridge'],
       zip_safe=False)
